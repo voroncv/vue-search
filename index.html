@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="searchString" placeholder="Enter your search terms" />
+	<paginate :per="2" name="articles" :list="filteredArticles" class="paginate-list">
+    <li v-for="article in paginated('articles')">
+      <a v-bind:href="article.url"><img v-bind:src="article.image" /></a>
+      <p>{{article.title}}</p>
+    </li>
+  </paginate>
+  <paginate-links  v-if="filteredArticles.length > 2" for="articles" :simple="{
+        next: 'Next »',
+        prev: '« Back'
+      }"></paginate-links>
+	  <p class="noresult" v-if="!filteredArticles.length">Nothing not found</p>
+  </div>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script src="https://rawgit.com/TahaSh/vue-paginate/master/dist/vue-paginate.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
